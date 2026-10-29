@@ -2122,8 +2122,12 @@
 /* ============================================================
    B.Tech Guidance Center Styles
    ============================================================ */
+.guidance-page {
+  padding-bottom: 4rem;
+}
+
 .guidance-page-container {
-  padding: 2.5rem 0 4rem;
+  padding-bottom: 4rem;
 }
 
 .guidance-hero-card {
@@ -2153,47 +2157,37 @@
 .guidance-stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  max-width: 800px;
 }
 
 .guidance-stat-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-md);
-  padding: 1.25rem;
+  padding: 1.1rem 1.25rem;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.guidance-stat-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
 }
 
 .guidance-stat-card .stat-val {
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-size: 1.85rem;
+  font-weight: 800;
   color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
 }
 
 .guidance-stat-card .stat-lbl {
   font-size: 0.85rem;
-  color: #e0e7ff;
-}
-
-.guidance-search-bar {
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  background: #ffffff;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 0.75rem 1.25rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-}
-
-.guidance-search-bar input {
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  width: 100%;
-  margin-left: 0.75rem;
-  background: transparent;
+  color: #c7d2fe;
+  font-weight: 500;
 }
 
 .guidance-category-tabs {
@@ -2238,22 +2232,97 @@
   background: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  padding: 1.75rem;
-  margin-bottom: 1.75rem;
-}
-
-.active-category-header h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  padding: 1.75rem 2rem;
+  margin-bottom: 2rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.active-category-header p {
+.category-header-info {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1;
+  min-width: 280px;
+}
+
+.category-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.active-cat-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 0.35rem 0;
+}
+
+.active-cat-tagline {
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  line-height: 1.6;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.guidance-search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1rem;
+  min-width: 280px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guidance-search-box:focus-within {
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.guidance-search-box .search-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.guidance-search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.92rem;
+  width: 100%;
+  color: var(--text-main);
+}
+
+.search-clear-btn {
+  background: rgba(0, 0, 0, 0.06);
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.search-clear-btn:hover {
+  background: rgba(0, 0, 0, 0.12);
+  color: var(--text-main);
 }
 
 .guidance-topic-card {
@@ -2262,40 +2331,105 @@
   border-radius: var(--radius-md);
   margin-bottom: 1.25rem;
   overflow: hidden;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .guidance-topic-card:hover {
   border-color: #cbd5e1;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
 
-.guidance-topic-header {
+.guidance-topic-card.is-expanded {
+  border-color: var(--primary-light);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.08);
+}
+
+.topic-card-toggle-header {
   padding: 1.25rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   user-select: none;
+  background: #ffffff;
+  transition: background 0.15s ease;
 }
 
-.guidance-topic-header h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
+.topic-card-toggle-header:hover {
+  background: #f8fafc;
+}
+
+.topic-header-title-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex: 1;
+}
+
+.topic-order-badge {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.topic-headline {
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--text-main);
-  margin: 0;
+  margin: 0 0 0.35rem 0;
 }
 
-.guidance-topic-body {
+.topic-summary-line {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.toggle-indicator {
+  color: var(--text-muted);
+  margin-left: 1rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.topic-expanded-body {
   padding: 1.5rem;
   border-top: 1px solid var(--border-light);
-  background: var(--bg-card-subtle);
+  background: #fafbfe;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.guidance-section-block,
+.guidance-checklist-block {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+}
+
+.section-mini-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 1rem 0;
 }
 
 .guidance-points-list {
   list-style: none;
   padding: 0;
-  margin: 1rem 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -2306,55 +2440,84 @@
   align-items: flex-start;
   gap: 0.75rem;
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--text-secondary);
 }
 
-.guidance-point-bullet {
+.guidance-point-item .bullet-point {
   color: var(--primary);
   font-weight: bold;
   font-size: 1.1rem;
-  line-height: 1;
+  line-height: 1.2;
+}
+
+.checklist-items-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
 .checklist-item-row {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.65rem 0.85rem;
+  padding: 0.75rem 1rem;
   background: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
-  margin-bottom: 0.5rem;
-  transition: background 0.15s ease;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .checklist-item-row:hover {
   background: #f8fafc;
+  border-color: #cbd5e1;
 }
 
-.checklist-item-row.checked-item {
+.checklist-item-row.item-checked {
   background: #f0fdf4;
   border-color: #bbf7d0;
 }
 
-.checklist-item-row.checked-item span {
+.checklist-item-row.item-checked .checklist-text {
   text-decoration: line-through;
   color: var(--text-muted);
 }
 
+.checklist-text {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  user-select: none;
+}
+
 .guidance-advisory-box {
-  background: #eff6ff;
+  background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
   border: 1px solid #bfdbfe;
-  border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
-  margin-top: 1.25rem;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-top: 2.5rem;
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: 1rem;
+}
+
+.guidance-advisory-box .advisory-icon {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.advisory-title {
+  font-size: 1.05rem;
+  font-weight: 700;
   color: #1e40af;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  margin: 0 0 0.35rem 0;
+}
+
+.advisory-text {
+  font-size: 0.95rem;
+  color: #1e3a8a;
+  margin: 0;
+  line-height: 1.6;
 }
 
 /* ============================================================

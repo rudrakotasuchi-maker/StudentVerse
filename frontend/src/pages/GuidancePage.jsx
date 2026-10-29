@@ -95,34 +95,34 @@ export default function GuidancePage() {
   const completedChecklistCount = Object.values(completedChecklistItems).filter(Boolean).length;
 
   return (
-    <div className="guidance-page-container">
+    <div className="guidance-page">
       {/* Hero Header */}
-      <section className="page-hero">
+      <section className="page-header-banner">
         <div className="container">
-          <div className="hero-badge">
+          <div className="hero-badge" style={{ marginBottom: '1rem' }}>
             <Sparkles size={16} />
             <span>Essential B.Tech Handbook</span>
           </div>
-          <h1 className="hero-title">B.Tech Student Guidance Center</h1>
-          <p className="hero-subtitle">
+          <h1 className="page-header-title">B.Tech Student Guidance Center</h1>
+          <p className="page-header-subtitle">
             From First-Year Confusion to Career Readiness — Complete, practical advice across all 7 essential dimensions of engineering college life.
           </p>
 
           {/* Quick Metrics Bar */}
-          <div className="guidance-stats-row">
-            <div className="stat-pill">
-              <span className="stat-num">{categories.length}</span>
-              <span className="stat-label">Core Dimensions</span>
+          <div className="guidance-stats-grid">
+            <div className="guidance-stat-card">
+              <div className="stat-val">{categories.length}</div>
+              <div className="stat-lbl">Core Dimensions</div>
             </div>
-            <div className="stat-pill">
-              <span className="stat-num">
+            <div className="guidance-stat-card">
+              <div className="stat-val">
                 {categories.reduce((acc, c) => acc + (c.topics?.length || 0), 0)}
-              </span>
-              <span className="stat-label">Guidance Guides</span>
+              </div>
+              <div className="stat-lbl">Guidance Guides</div>
             </div>
-            <div className="stat-pill">
-              <span className="stat-num text-success">{completedChecklistCount}</span>
-              <span className="stat-label">Checklist Milestones Done</span>
+            <div className="guidance-stat-card">
+              <div className="stat-val" style={{ color: '#4ade80' }}>{completedChecklistCount}</div>
+              <div className="stat-lbl">Checklist Milestones Done</div>
             </div>
           </div>
         </div>
