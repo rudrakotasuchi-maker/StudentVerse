@@ -164,26 +164,29 @@ export default function ProfilePage() {
                   value={academicYear}
                   onChange={(e) => setAcademicYear(e.target.value)}
                 >
-                  <option value="1">1st Year (Freshman)</option>
-                  <option value="2">2nd Year (Sophomore)</option>
-                  <option value="3">3rd Year (Junior)</option>
-                  <option value="4">4th Year (Senior)</option>
+                  <option value="1">1st Year (Beginner)</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
                 </select>
               </div>
             </div>
 
             <div className="form-group">
               <label htmlFor="p-interests" className="form-label">
-                Areas of Interest (Comma-separated)
+                Areas of Interest <span className="text-muted" style={{ fontWeight: 400 }}>(Optional - discoverable via Interest Finder)</span>
               </label>
               <input
                 id="p-interests"
                 type="text"
                 className="form-control"
-                placeholder="e.g. Web Development, AI/ML, Cloud Computing, VLSI"
+                placeholder="e.g. Web Development, AI & Machine Learning, Robotics (Optional)"
                 value={interests}
                 onChange={(e) => setInterests(e.target.value)}
               />
+              <span className="text-muted" style={{ fontSize: '0.8rem', display: 'block', marginTop: '0.3rem' }}>
+                You can also discover your ideal career path using the <Link to="/interest-finder" style={{ color: 'var(--primary)' }}>Interest Finder</Link> or <Link to="/branches" style={{ color: 'var(--primary)' }}>Branch Explorer</Link>.
+              </span>
             </div>
 
             <button

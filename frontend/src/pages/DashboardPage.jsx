@@ -159,11 +159,15 @@ export default function DashboardPage() {
               </div>
               <h2 className="next-topic-title">Choose Your Target B.Tech Career Path</h2>
               <p className="next-topic-desc">
-                You haven't selected your target career path yet. Take our 7-dimension Interest Finder to get transparent compatibility recommendations and unlock your 4-year curriculum.
+                Welcome to StudentVerse! You haven't chosen your target career path yet. Take our 8-dimension Interest Discovery questionnaire or explore your branch options to discover compatible career paths at your own pace.
               </p>
-              <div className="next-topic-btn-row">
+              <div className="next-topic-btn-row" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 <Link to="/interest-finder" className="btn btn-primary">
                   <span>Take Interest Finder</span>
+                  <ArrowRight size={16} />
+                </Link>
+                <Link to="/branches" className="btn btn-secondary">
+                  <span>Explore B.Tech Branches</span>
                   <ArrowRight size={16} />
                 </Link>
               </div>

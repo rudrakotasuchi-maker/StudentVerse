@@ -1,6 +1,8 @@
 const validBranches = [
   'CSE',
   'AI&DS',
+  'AI&ML',
+  'IT',
   'ECE',
   'EEE',
   'Mechanical Engineering',

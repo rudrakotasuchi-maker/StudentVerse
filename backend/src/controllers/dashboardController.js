@@ -134,31 +134,31 @@ async function getDashboardSummary(req, res, next) {
 
     if (student.academic_year === 1) {
       recommendations.push({
-        action: 'Master C/C++ & Git',
-        tip: 'First year is ideal for mastering core procedural programming and setting up your GitHub profile.',
-        link: '/learning-resources',
+        action: 'Explore Branch & Foundations',
+        tip: 'First year is ideal for exploring your branch curriculum, discovering career options without prior coding, and mastering fundamentals.',
+        link: '/branches',
         badge: 'Year 1 Focus'
       });
     } else if (student.academic_year === 2) {
       recommendations.push({
-        action: 'Solve 100 DSA Problems',
-        tip: 'Second year is the sweet spot for Data Structures & Algorithms. Practice arrays, trees, and recursion.',
-        link: '/tests-practice',
+        action: 'Master Tech Skills & Coding Practice',
+        tip: 'Second year is the sweet spot for Data Structures & Algorithms, learning core languages (Java/Python/C++), and exploring specializations.',
+        link: '/coding-practice',
         badge: 'Year 2 Focus'
       });
     } else if (student.academic_year === 3) {
       recommendations.push({
         action: 'Build Portfolio & Hunt Internships',
-        tip: 'Third year is the peak time to apply for Summer Internships and build full-stack or hardware capstones.',
-        link: '/opportunities',
-        badge: 'Internship Season'
+        tip: 'Third year is peak time to follow 4-year roadmaps, build portfolio deliverables, and apply for summer internships & hackathons.',
+        link: '/career-roadmap',
+        badge: 'Year 3 Focus'
       });
     } else if (student.academic_year === 4) {
       recommendations.push({
         action: 'Placement Prep & Mock Interviews',
-        tip: 'Revise core CS/core engineering, take mock aptitude tests, and polish your 1-page resume.',
+        tip: 'Final year is dedicated to core technical interview Q&As, quantitative aptitude, ATS resume polish, and campus placement drives.',
         link: '/project-prep',
-        badge: 'Placement Drive'
+        badge: 'Year 4 Focus'
       });
     }
 

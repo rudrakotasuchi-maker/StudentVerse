@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { GraduationCap, UserPlus, AlertCircle, ArrowRight } from 'lucide-react';
+import { GraduationCap, UserPlus, AlertCircle, ArrowRight, Sparkles, Compass } from 'lucide-react';
 
 const branches = [
   'CSE',
@@ -14,18 +14,36 @@ const branches = [
   'Civil Engineering'
 ];
 
-const availableInterests = [
-  'Web Development',
-  'AI & Machine Learning',
-  'Data Analytics',
-  'Cybersecurity',
-  'Embedded Systems & IoT',
-  'Power & Electric Vehicles',
-  'CAD & Robotics',
-  'Civil & Structural BIM',
-  'GATE Preparation',
-  'Government Engineering Services'
-];
+const yearGuidanceInfo = {
+  '1': {
+    badge: '1st Year: Foundations & Branch Discovery',
+    color: '#4f46e5',
+    bg: '#eef2ff',
+    border: '#c7d2fe',
+    text: 'Explore branches, foundational engineering concepts, and diverse career options without needing any prior coding or technical knowledge.'
+  },
+  '2': {
+    badge: '2nd Year: Core Technical Skills & Languages',
+    color: '#0284c7',
+    bg: '#f0f9ff',
+    border: '#bae6fd',
+    text: 'Explore core technical skills, foundational data structures, modern programming languages (Java, Python, C++), and possible career specializations.'
+  },
+  '3': {
+    badge: '3rd Year: Roadmaps, Projects & Internships',
+    color: '#7c3aed',
+    bg: '#f5f3ff',
+    border: '#ddd6fe',
+    text: 'Follow structured 4-year roadmaps, build portfolio project deliverables, practice coding, and prepare for summer internships & hackathons.'
+  },
+  '4': {
+    badge: '4th Year: Interview Prep & Placement Readiness',
+    color: '#059669',
+    bg: '#ecfdf5',
+    border: '#a7f3d0',
+    text: 'Focus on technical interview preparation (DSA, OS, DBMS, Networks), project defense, ATS resume polishing, and campus placement drives.'
+  }
+};
 
 export default function RegisterPage() {
   const { register } = useAuth();
@@ -36,17 +54,8 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('');
   const [branch, setBranch] = useState('CSE');
   const [academicYear, setAcademicYear] = useState('1');
-  const [selectedInterests, setSelectedInterests] = useState(['Web Development']);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const toggleInterest = (interest) => {
-    if (selectedInterests.includes(interest)) {
-      setSelectedInterests(selectedInterests.filter(i => i !== interest));
-    } else {
-      setSelectedInterests([...selectedInterests, interest]);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,17 +78,18 @@ export default function RegisterPage() {
         email: email.trim(),
         password,
         branch,
-        academic_year: parseInt(academicYear, 10),
-        areas_of_interest: selectedInterests
+        academic_year: parseInt(academicYear, 10)
       });
-      // Redirect to branch exploration for guided onboarding
-      navigate('/branches');
+      // Direct student to their personalized dashboard tailored to their academic year
+      navigate('/dashboard');
     } catch (err) {
       setError(err.message || 'Registration failed. Please verify your details.');
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const currentYearGuidance = yearGuidanceInfo[academicYear] || yearGuidanceInfo['1'];
 
   return (
     <div className="auth-page-wrapper">
@@ -91,7 +101,7 @@ export default function RegisterPage() {
             </div>
             <h1 className="auth-title">Create Your Student Profile</h1>
             <p className="auth-subtitle">
-              Join StudentVerse to discover career opportunities and personalized B.Tech roadmaps
+              Join StudentVerse to explore branches, learning roadmaps, coding practice, and career paths
             </p>
           </div>
 
@@ -137,13 +147,13 @@ export default function RegisterPage() {
 
             <div className="form-group">
               <label htmlFor="reg-password" className="form-label">
-                Create Password (Min 6 characters) <span className="text-danger">*</span>
+                Password <span className="text-danger">*</span>
               </label>
               <input
                 id="reg-password"
                 type="password"
                 className="form-control"
-                placeholder="Create a secure password"
+                placeholder="Create a secure password (minimum 6 characters)"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="new-password"
@@ -151,7 +161,7 @@ export default function RegisterPage() {
               />
             </div>
 
-            <div className="grid grid-cols-2" style={{ gap: '1rem', marginBottom: '1.25rem' }}>
+            <div className="grid grid-cols-2" style={{ gap: '1rem', marginBottom: '0.85rem' }}>
               <div className="form-group" style={{ margin: 0 }}>
                 <label htmlFor="reg-branch" className="form-label">
                   B.Tech Branch <span className="text-danger">*</span>
@@ -180,32 +190,63 @@ export default function RegisterPage() {
                   onChange={(e) => setAcademicYear(e.target.value)}
                   required
                 >
-                  <option value="1">1st Year (Freshman)</option>
-                  <option value="2">2nd Year (Sophomore)</option>
-                  <option value="3">3rd Year (Junior)</option>
-                  <option value="4">4th Year (Senior)</option>
+                  <option value="1">1st Year (Beginner)</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
                 </select>
               </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">
-                Areas of Interest (Select all that apply)
-              </label>
-              <div className="interest-chips-container">
-                {availableInterests.map((interest) => {
-                  const isSelected = selectedInterests.includes(interest);
-                  return (
-                    <button
-                      type="button"
-                      key={interest}
-                      className={`interest-chip ${isSelected ? 'selected' : ''}`}
-                      onClick={() => toggleInterest(interest)}
-                    >
-                      {interest}
-                    </button>
-                  );
-                })}
+            {/* Dynamic Academic Year Guidance Banner */}
+            <div
+              style={{
+                background: currentYearGuidance.bg,
+                border: `1px solid ${currentYearGuidance.border}`,
+                borderRadius: '8px',
+                padding: '0.75rem 1rem',
+                marginBottom: '1rem',
+                transition: 'all 0.25s ease'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.25rem' }}>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    color: currentYearGuidance.color,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                  }}
+                >
+                  {currentYearGuidance.badge}
+                </span>
+              </div>
+              <p style={{ margin: 0, fontSize: '0.84rem', color: '#334155', lineHeight: '1.45' }}>
+                {currentYearGuidance.text}
+              </p>
+            </div>
+
+            {/* Beginner-Friendly Post-Registration Discovery Note */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '0.6rem',
+                background: '#f8fafc',
+                border: '1px dashed #cbd5e1',
+                borderRadius: '8px',
+                padding: '0.8rem 1rem',
+                marginBottom: '1.5rem',
+                fontSize: '0.84rem',
+                color: '#475569',
+                lineHeight: '1.45'
+              }}
+            >
+              <Sparkles size={18} style={{ color: 'var(--primary, #4f46e5)', flexShrink: 0, marginTop: '2px' }} />
+              <div>
+                <strong style={{ color: '#1e293b' }}>Discover interests at your own pace:</strong>{' '}
+                No prior technical knowledge is required today. After registration, explore career options and discover your interests through our guided Interest Finder whenever you are ready.
               </div>
             </div>
 
